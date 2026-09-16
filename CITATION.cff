@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: "Bell pair consistency"
+version: 1.0.0
+license: "MIT"
+type: studie
+message: "Si vous utilisez ces data/logiciel, merci de les citer."
+
+authors:
+  - family-names: "Revoire"
+    given-names: "Chriistian"
+    orcid: "https://orcid.org/0009-0004-8424-9053"
+
+keywords:
+  - Bell inequality
+  - Pair consistency
+  - Pair synchronisation
+  - Pair correlation
+  - Hidden variables
+  - Quantum intrication
