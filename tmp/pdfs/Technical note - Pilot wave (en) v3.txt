@@ -1,0 +1,229 @@
+PAGE 1
+On the Mechanical Origin of Quantum 
+Statistics 
+ 
+Emergence of Born’s Rule and Pauli-Type Exclusion  
+Author: Revoire Christian (Independent Research) 
+Contact: revoire.christian@gmail.com 
+Date: Janvier 2026  
+ 
+Source code: https://github.com/Zobeewan/emergent-quantum-statistics.git 
+ 
+Abstract 
+This document presents numerical simulation results of a local hidden-variable model inspired by 
+hydrodynamic quantum analogs of the “walking droplet” type. Unlike standard pilot-wave approaches in 
+which the guiding field influences the particle without being affected in return, we implement here a 
+continuous bidirectional coupling: the particle acts as a moving source that generates its own pilot field. We 
+show that this local deterministic dynamics with stochastic noise is sufficient to produce, without additional 
+axioms, the emergence of at least two key statistical features of quantum mechanics: relaxation toward the 
+Born distribution (𝜌(𝑥) ≈  |𝜓|²), and a Pauli-type exclusion for two particles interacting through the medium. 
+ 
+ 
+ 
+1. Physical Model 
+The system is modeled as the coupling between a complex scalar field 𝜓(𝑥, t)  and N point-like 
+particles with trajectories  𝑥𝑝(t) 
+ 
+ 
+1.1. Field Dynamics (The Medium) 
+The pilot wave evolves according to a nonlinear diffusive Schrödinger-type equation with source 
+terms, inspired by the physics of walking droplets: 
+ 
+∂𝜓
+∂t =  (𝐷𝜓 + iω)∇²𝜓 − γ𝜓 − iV(𝑥)𝜓 + ∑ S(𝑥 − 𝑥𝑘(t))
+𝑘
+ 
+ 
+ 
+• 𝑫𝝍, 𝛚: Diffusion and dispersion coefficients (analogous to 
+ℏ
+2m). 
+• 𝛄: Dissipation (possibly zero for a system with infinite memory and range, but useful for numerical 
+stability). 
+• 𝐕(𝒙): External potential 
+ 
+
+PAGE 2
+• 𝐒(𝐱): Gaussian source term centered on each particle (particle-to-field feedback) 
+S(𝑥 − 𝑥𝑘)  =  A exp ( − 
+|𝑥 − 𝑥𝑘|²
+2σ²  ) 
+With: 
+o 𝐀 : Source emission amplitude 
+o 𝛔 : Spatial width of the source 
+ 
+1.2. Particle Dynamics (Guidance) 
+Particles follow an overdamped Langevin dynamics guided by the phase gradient of the total wave field: 
+ 
+𝑑𝑥𝑝 =  [α ⋅ W(|𝜓|2) ⋅ ∇ϕ] dt + √2 𝐷𝑥 𝑑𝑡 
+ 
+• 𝛁𝛟: local phase velocity.  
+• 𝛂: Inertial coupling coefficient (analogous to 
+k
+m). 
+• 𝐖: Nonlinear saturation factor (prevents singularities at nodes). 
+                                   W(|𝜓|2) =  
+   |𝜓|2
+|𝜓|2 +  ε²           𝑤𝑖𝑡ℎ (ε =  10⁻⁴) 
+• 𝑫𝒙: Stochastic noise intensity. 
+ 
+𝑫𝝍 = 0.9 ; 𝛚 = 2.0 ; 𝛄 = 0.045 ; 𝐀 = 0.57 ; 𝛂 = 4.0 ; 𝑫𝒙 = 0.28 
+Values currently used, but all model parameters can still be optimized via algorithmic exploration (but 
+computation time is very long). 
+The stochastic noise 𝑫𝒙 is used to simulate chaotic behavior that should emerge from a model with more 
+degrees of freedom and more realistic interactions.  
+All simulations are performed in sufficiently large domains so that boundary effects can be neglected. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+PAGE 3
+2. Results: Emergence of Born’s Rule (1D) 
+A single particle is simulated many times over 40,000 time steps. The empirical probability density 𝜌(𝑥), 
+obtained from the histogram of particle positions, is compared to the time-averaged field intensity |𝜓𝑒𝑓𝑓|² 
+ 
+Observations: 
+• The particle, initially launched at random, relaxes toward an ergodic trajectory that samples the 
+eigenmodes of the dynamical cavity it generates. 
+• The measured correlation between 𝜌(𝑥),  and |𝜓|² is excellent, with a very small relative L¹ error. 
+• These results support the “quantum relaxation” hypothesis: |𝜓|² acts as a natural statistical attractor 
+of the chaotic dynamics. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3. Results: Pauli-Type Exclusion (Two-Body Interaction) 
+The model is extended to two identical particles. In each run, two particle pairs are generated: 
+• One real pair, capable of interacting indirectly via the deformation of a shared field, 
+coupling: 𝜓 =  𝜓1  +  𝜓2 
+ 
+• One “ghost” pair evolving in separate fields and therefore unable to interact. 
+Spatial correlations are then analyzed to detect fermion-like signatures. 
+No antisymmetrization of the wave function is imposed. The observed exclusion arises solely from 
+dynamically induced field-mediated interactions. 
+Figure 1. Empirical probability density 
+ρ(x) (blue) versus pilot-wave intensity 
+|ψ|² (red). 
+The convergence is nearly perfect  
+(Corr = 0.9998), with a very small error  
+(L¹ = 0.0084). 
+ 
++ Comparison with the analytical solution 
+of the Schrödinger equation (green) is 
+shown for validation. 
+ 
+N=10,000 simulated particles. 
+(Convergence appears rapidly (N > 600), 
+and increases monotonically with bigger 
+sample size) 
+ 
+ 
+
+PAGE 4
+Observations: 
+• Spatial correlations – Fermi hole: The pair correlation function 𝑔(2)(𝑟) drops below unity at short 
+distances, with 𝑔(2)(0)  <  0.35, indicating strong exclusion behavior. 
+• Spatial exclusion: Particles spontaneously avoid each other. The joint position heatmap shows a 
+suppression along the diagonal 𝑥1 =  𝑥2. The density of close encounters is significantly reduced for 
+interacting pairs compared to non-interacting ghost pairs. 
+ 
+ 
+Figure 2. Simulations over 12,000 particle pairs. 
+Two-particle correlations: (top-left) 𝑔(2)(𝑟) showing a Fermi-hole-like structure; (bottom-left) joint position heatmap (𝑥1, 𝑥2) with 
+a depleted diagonal, illustrating Pauli-type exclusion. 
+ 
+Interpretation of Quantitative Differences:  
+ The asymmetry observed in the joint position heatmap is not a failure of prediction or a failure of 
+exclusion, but a direct consequence of using distinguishable particles with fixed initial labels.  
+ 
+The discrepancy between the measured heatmap (bottom-left) and the theoretical fermionic 
+heatmap (bottom-right) arises from particle distinguishability in the simulation. Particles are initialized with 
+one on the left (x₁ ≈ −10) and one on the right (x₂ ≈ 10), producing a concentration in that region. 
+For joint positions to cross the diagonal, particles must pass through each other to exchange sides. While 
+possible, such crossings are suppressed by the exclusion dynamics. 
+In contrast, theoretical fermionic heatmaps assume particle indistinguishability: it is fundamentally 
+impossible to identify which particle occupies which side. Impossible to know whether the particle located at 
+𝑥 ≈ −10  is indeed particle 1, launched to the left, or the other particle that has switched sides. Since the 
+particles are indistinguishable, we must assume that they may have swapped places, leading to the 
+symmetric distribution with two lobes on both side of the diagonal. 
+
+
+PAGE 5
+It can easily be shown that this comes from the indistinguishability of the fermions, by varying initial 
+conditions in my simulation, we can have either way: the spot in the top left (simulation in normal mode), 
+the spot in the bottom right (simulation in inverted mode) or the 2 symmetrical spots as in the classical 
+model (simulation in random mode, the particles are launched randomly P1 on the left and P2 on the right 
+or vice versa) 
+Thus, fermionic indistinguishability seems to emerges here as a statistical property of ensembles of 
+distinguishable particles, revealed through symmetry under inversion of initial conditions. 
+ 
+The finite value 𝑔(2)(0)  ≈  0.35 , instead of the ideal 𝑔(2)(0) =  0 , is attributed to classical tunneling 
+effects (particles with sufficient kinetic energy to overcome the repulsive barrier induced by the field), and to 
+the absence of explicit antisymmetrization. Each crossing (red points on the other side of the heatmap 
+diagonal), contributes directly to 𝑔(2)(𝑟).  
+ 
+Coupling mode: 
+The coupling mode of the two particles interacting through the shared field can be changed in the 
+simulation, switching between two different modes: “sum” or “diff”. 
+sum:  𝜓 =  𝜓1  +  𝜓2 
+diff:    𝜓 =  𝜓1  −  𝜓2 
+The “sum” mode induces the fermionic behavior of exclusion described above, whereas the “diff” mode 
+induces a bosonic behavior of bunching. 
+Furthermore, mathematically, subtracting is equivalent to adding a wave phase shifted by π 
+𝜓 =  𝜓1(𝜑) − 𝜓2(𝜑) =  𝜓1(𝜑) + 𝜓2(𝜑 + 𝜋) 
+This transforms the interference pattern from one creating an effective repulsive barrier, to one creating an 
+effective attractive well.  
+This modeling could provide insights into the mechanisms underlying this quantum behavior and statistics 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+4. Perspectives: Emergent Polarization in 2D 
+Preliminary two-dimensional simulations were performed to test the robustness of the model and visualize 
+the field structure.  
+• Born rule in 2D: The particle correctly samples the 2D field, with 𝜌(𝑥, 𝑦) ≈  |𝜓|² 
+• 2D structures: Although 𝜓 is a scalar field, analysis of the probability current 
+J = Im(𝜓 ∗ ∇𝜓) reveals local vectorial structures (vortices), suggesting a possible connection with 
+intrinsic angular momentum (spin), which remains to be explored. 
+
+PAGE 6
+ 
+Fig 3. Simulation 2D. (Top) Comparison between particle density and Born’s rule. 
+(Bottom-left) Probability current vectors showing the internal field dynamics.  
+ 
+ 
+ 
+Conclusion 
+These results suggest that Born and Pauli statistics don't necessarily have to be taken as 
+fundamental postulates, but may instead emerge from a local and stochastic pilot-wave dynamics with 
+feedback. The source code (Python/Numba) is publicly available for replication. 
+ 
+ 
+ 
+ 
+Speculative Interpretation of the Model:  
+Importantly, one possible (though not mandatory) interpretation of this model is that it naturally 
+allows for a fundamental distinction between fermions and bosons. 
+Fermions may be viewed as coupled particle-wave entities that interact together, whereas bosons 
+correspond to pure waves that propagate and superpose classically. Fermions emit a bosonic excitation 
+during each interaction with their wave field, or even continuously. 
+In this model, the polarization of emitted bosons (e.g., photons) can be considered as an emergent property 
+of the propagation modes of the field emitted by the source particle. Rather than as a fundamental degree 
+of freedom. By analogy, these modes can be likened to transverse or rotational propagation structures, 
+evidently dependent on the orientation relative to the detector (somehow also analogous to classical wave 
+propagation: P-waves, S-waves, etc.) 
+ 

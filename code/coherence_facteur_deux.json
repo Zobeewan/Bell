@@ -1,0 +1,199 @@
+{
+  "scope": "Quantum coherence benchmark; not a local event-generating mechanism.",
+  "formula": "E_c(a,b)=-(1+c)/2*cos(a-b), after uniform planar rotation",
+  "maximum_identity_error": 4.440892098500626e-16,
+  "states": [
+    {
+      "coherence": 0.0,
+      "visibility": 0.5,
+      "correlation_tensor_diagonal_xyz": [
+        -0.5,
+        0.0,
+        -0.4999999999999998
+      ],
+      "aligned_joint_probabilities": [
+        [
+          0.125,
+          0.3749999999999999
+        ],
+        [
+          0.3749999999999999,
+          0.125
+        ]
+      ],
+      "rho_eigenvalues": [
+        0.0,
+        0.2499999999999999,
+        0.25,
+        0.4999999999999999
+      ]
+    },
+    {
+      "coherence": 0.25,
+      "visibility": 0.625,
+      "correlation_tensor_diagonal_xyz": [
+        -0.625,
+        -0.25,
+        -0.6249999999999999
+      ],
+      "aligned_joint_probabilities": [
+        [
+          0.09375,
+          0.40624999999999994
+        ],
+        [
+          0.40624999999999994,
+          0.09375
+        ]
+      ],
+      "rho_eigenvalues": [
+        0.0,
+        0.18749999999999994,
+        0.1875,
+        0.625
+      ]
+    },
+    {
+      "coherence": 0.5,
+      "visibility": 0.75,
+      "correlation_tensor_diagonal_xyz": [
+        -0.7499999999999999,
+        -0.4999999999999999,
+        -0.7500000000000001
+      ],
+      "aligned_joint_probabilities": [
+        [
+          0.0625,
+          0.43750000000000006
+        ],
+        [
+          0.43750000000000006,
+          0.0625
+        ]
+      ],
+      "rho_eigenvalues": [
+        -1.4365678785432934e-17,
+        0.12499999999999999,
+        0.12500000000000017,
+        0.75
+      ]
+    },
+    {
+      "coherence": 0.75,
+      "visibility": 0.875,
+      "correlation_tensor_diagonal_xyz": [
+        -0.8749999999999999,
+        -0.7499999999999999,
+        -0.875
+      ],
+      "aligned_joint_probabilities": [
+        [
+          0.03125,
+          0.46875
+        ],
+        [
+          0.46875,
+          0.03125
+        ]
+      ],
+      "rho_eigenvalues": [
+        0.0,
+        0.0625,
+        0.06250000000000006,
+        0.8750000000000002
+      ]
+    },
+    {
+      "coherence": 1.0,
+      "visibility": 1.0,
+      "correlation_tensor_diagonal_xyz": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "aligned_joint_probabilities": [
+        [
+          0.0,
+          0.5
+        ],
+        [
+          0.5,
+          0.0
+        ]
+      ],
+      "rho_eigenvalues": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "interference_example": {
+    "phi": 0.2,
+    "a": 1.1,
+    "b": 0.7,
+    "incoherent": [
+      [
+        0.1136214828871093,
+        0.3863785171128908
+      ],
+      [
+        0.3863785171128908,
+        0.1136214828871093
+      ]
+    ],
+    "coherent": [
+      [
+        0.019734751499278745,
+        0.4802652485007213
+      ],
+      [
+        0.4802652485007213,
+        0.019734751499278745
+      ]
+    ],
+    "cross": [
+      [
+        -0.09388673138783055,
+        0.09388673138783049
+      ],
+      [
+        0.09388673138783049,
+        -0.09388673138783055
+      ]
+    ]
+  },
+  "classical_gaussian_fields": {
+    "source": "E_A=z; E_B=J conjugate(z); circular complex Gaussian z",
+    "samples": 600000,
+    "a": 0.21,
+    "b": 1.03,
+    "raw_intensity_matrix": [
+      [
+        1.162777321656904,
+        1.8424122759107022
+      ],
+      [
+        1.8517386844142503,
+        1.1618718899882374
+      ]
+    ],
+    "connected_intensity_matrix": [
+      [
+        0.16066524035664664,
+        0.8423183520750712
+      ],
+      [
+        0.8474982545779526,
+        0.15965390390605938
+      ]
+    ],
+    "raw_normalized_correlation": -0.2275373346099213,
+    "raw_exact": -0.22740706909587116,
+    "connected_normalized_correlation": -0.6812960078772963,
+    "connected_exact": -0.6822212072876135,
+    "note": "The connected quantity subtracts the product of mean intensities; it is not a raw binary-event correlation."
+  },
+  "all_checks_passed": true
+}

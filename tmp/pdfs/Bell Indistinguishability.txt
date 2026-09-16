@@ -1,0 +1,373 @@
+PAGE 1
+Classical Indistinguishability And Bell Correlations  
+ 
+Abstract :  
+Je propose une modification de l’observable corrélationnelle dans le contexte d’un test de Bell, 
+fondée sur l’indiscernabilité de branches internes associées à chaque paire émise. L’idée centrale est 
+que, pour une paire corrélée donnée, il existe deux scénarios d’émission localement exclusifs mais 
+statistiquement indiscernables au niveau du montage : une branche où la particule « gauche » est 
+détectée par Alice et la « droite » par Bob (branche gd), et une branche symétrique où Alice reçoit la 
+particule « droite » et Bob la « gauche » (branche dg) 
+  
+Lorsqu’on construit la corrélation conjointe 𝐸(𝛼, 𝛽), il est possiblement légitime, de tenir compte des 
+deux contributions possibles (𝐴𝑔, 𝐵𝑑) et (𝐴𝑑, 𝐵𝑔) dans le numérateur, puisque leur indiscernabilité 
+double toutes les "possibilités" effectives de ±1. Ce qui sur un tirage individuel symétrique 50/50 ne 
+change pas les marginales, mais change la structure des probabilités conjointes, de manière à passer 
+d’une corrélation locale de type −
+1
+2 𝑐𝑜𝑠(Δ) à une corrélation effective −cos(Δ). 
+ 
+Branches gd/dg, corrélations partielles et facteur 2 
+Mon argument est que les modèles locaux classiques “oublient” une branche et donc réduisent par 
+deux l’amplitude corrélationnelle ; à l’inverse, cette reconstruction locale restaure la seconde 
+branche dans le numérateur, sans modifier le nombre d’événements observés dans le dénominateur, 
+ce qui rétablit le facteur 2.  
+Ce facteur 2 est précisément ce qui permet d’imaginer une corrélation partielle de branche valant 
+−
+1
+2 𝑐𝑜𝑠(Δ) et de retrouver comme probabilités conjointes la corrélation singulet −𝑐𝑜𝑠(Δ) après 
+agrégation des deux branches, ce qui est indispensable pour violer l’inégalité CHSH avec la forme 
+standard 𝑆 ≤ 2 
+ 
+𝐸𝐼𝑛𝑑𝑖𝑠𝑐𝑒𝑟𝑛𝑎𝑏𝑙𝑒 =  𝐸𝐼 =  1
+𝑁𝑝𝑎𝑖𝑟
+ ∑ (𝑋𝑖
+𝑔𝑑 + 𝑋𝑖
+𝑑𝑔)
+𝑁𝑝𝑎𝑖𝑟
+𝑖=1
+  
+𝐸𝐼 = −𝑐𝑜𝑠(𝛼 − 𝛽)  
+Avec  𝑋𝑖
+𝑔𝑑 = 𝐴𝑔,𝑖𝐵𝑑,𝑖   𝑒𝑡   𝑋𝑖
+𝑑𝑔 = 𝐴𝑑,𝑖𝐵𝑔,𝑖 
+ 
+𝐸𝐷𝑖𝑠𝑐𝑒𝑟𝑛𝑎𝑏𝑙𝑒 =  𝐸𝐷 =  1
+𝑁𝑝𝑎𝑖𝑟
+ ∑ 𝑋𝑖
+𝑔𝑑 𝑜𝑢 𝑑𝑔
+𝑁𝑝𝑎𝑖𝑟
+𝑖=1
+  
+𝐸𝐷 = −
+1
+2 𝑐𝑜𝑠(𝛼 − 𝛽) =  
+1
+2 𝐸𝐼  
+ 
+𝐸𝐼 = 2𝐸𝐷  
+
+PAGE 2
+Par construction, chaque paire i possède quatre résultats potentiels  
+(𝐴𝑔,𝑖 , 𝐴𝑑,𝑖 , 𝐵𝑔,𝑖 , 𝐵𝑑,𝑖) ∈ {−1, +1}4 .  
+On définit alors des variables de branche  
+𝑋𝑖
+𝑔𝑑 = 𝐴𝑔,𝑖𝐵𝑑,𝑖  𝑒𝑡  𝑋𝑖
+𝑑𝑔 = 𝐴𝑑,𝑖𝐵𝑔,𝑖   Qui valent chacune ±1.  
+La corrélation “discernable” 𝐸𝐷 est la moyenne de 𝑋𝑔𝑑 seule, tandis que la corrélation 
+“indiscernable” 𝐸𝐼 est la moyenne de la somme 𝑋𝑔𝑑 +  𝑋𝑑𝑔 , qui prend les valeurs {−2, +2}  
+ 
+Expériences réelles 
+Pour que ce model puisse expliquer ce qu’il se passe concrètement lors d’une expérience de Bell, 
+quand Alice et Bob regroupe leur résultat et calcul les produits (𝐴 ⋅ 𝐵). Tout se passerai comme si la 
+probabilité P(a,b) n'était pas normalisée à 1 mais à 2.  
+Descriptible comme ceci : 
+𝐸𝐼 =  𝟐
+𝑁𝑝𝑎𝑖𝑟
+ ∑ (𝑋𝑖
+𝑔𝑑 + 𝑋𝑖
+𝑑𝑔)
+2
+𝑁𝑝𝑎𝑖𝑟
+𝑖=1
+      
+ 
+Mathématiquement équivalent à une normalisation faite sur le nombre total de « micro 
+évènement ».  Et donc sur le nombre de paires fois le nombre de branches, et il y aurait donc ici 
+𝑁𝑡𝑜𝑡𝑎𝑙 = 2 ⋅ 𝑁𝑝𝑎𝑖𝑟 contributions élémentaires. 
+𝐸𝐼 =  1
+𝑁𝑡𝑜𝑡𝑎𝑙
+ ∑ (𝑋𝑖
+𝑔𝑑 + 𝑋𝑖
+𝑑𝑔)
+2
+𝑁𝑡𝑜𝑡𝑎𝑙
+𝑖=1
+ 
+ 
+Ou encore, c’est mathématiquement équivalent à avoir un nombre de particules émise 2 fois 
+inférieure à la réalité, ou équivalent à 50% de non détection. Mais attention il ne s’agit pas d’une 
+non-détection physique, au sens des défauts d’efficacité des détecteurs dans les tests de Bell. Toutes 
+les paires sont détectées. C’est la règle de comptage interne des micro-branches qui introduit ce 
+facteur. 
+ou     𝐸𝐼 = 1
+𝟎. 𝟓 ⋅ 𝑁𝑝𝑎𝑖𝑟
+ ∑ (𝑋𝑖
+𝑔𝑑 + 𝑋𝑖
+𝑑𝑔)
+2
+𝑁𝑝𝑎𝑖𝑟
+𝑖=1
+ 
+ 
+ 
+
+PAGE 3
+Au lieu qu'une seule branche contribue avec un poids 1 à chaque événement de coïncidence, les 
+deux branches contribuent chacune avec un poids 1 à une mesure conjointe Q de masse totale 2. 
+L'expérimentateur, ne pouvant distinguer ces deux micro-réalisations et ne comptant qu'un seul 
+événement par paire, normalise par 𝑁𝑝𝑎𝑖𝑟, sous-normalisant ainsi la mesure théorique et révélant 
+une corrélation effective −𝑐𝑜𝑠(Δ), exactement comme si le nombre total de micro-événements 
+était 2𝑁𝑝𝑎𝑖𝑟 tandis que le dénominateur empirique reste 𝑁𝑝𝑎𝑖𝑟. 
+Et si on normalise par la masse totale 2, on retombe sur −
+1
+2 𝑐𝑜𝑠(Δ). 
+Mais si on normalise par 𝑁𝑝𝑎𝑖𝑟 (la masse des macro-états, pas la masse totale des micro-états), on 
+obtient −𝑐𝑜𝑠(Δ). Exactement ce que fait l'utilisateur !  
+Cela revient à dire : l'expérimentateur observe N paires, mais la théorie locale sous-jacente compte 
+2N "configurations élémentaires" (parce que chaque paire a deux réalisations indiscernables).  
+Tout se passerait comme si la corrélation conjointe E(α, β) ne pouvait pas être estimée directement 
+comme une moyenne de produits locaux, parce que l'état préparé par la source n'est pas un couple 
+de particules discernables, mais une entité symétrisée dont la mesure conjointe est déjà, par 
+construction, une agrégation sur les permutations. Chaque 'détection de pair' est alors un macro-
+événement couvrant deux micro-scénarios, et l'estimateur empirique standard de la corrélation, 
+appliqué à cette population, sous-échantillonne d'un facteur 2 le nombre de micro-contributions 
+effectives. 
+Autrement dit : le postulat n'est pas sur le détecteur, mais sur l’observable corrélationnelle 
+conjointe. La source prépare une unique paire (gauche, droite), mais l’observable corrélationnelle 
+conjointe est un état statistique qui contient les deux assignations comme deux facettes d'une même 
+réalité. L'expérimentateur ne mesure pas le simple « produit de deux résultats », mais estime « la 
+valeur moyenne de la corrélation sur l'ensemble des assignations indiscernables compatibles avec la 
+détection » 
+E(A ⋅ B ∣ macro-étati) 
+Où la condition « macro-étati » signifie simplement « une particule a été détectée chez Alice et une 
+chez Bob, sans savoir laquelle ». 
+ 
+C’est à mon sens un postulat à opposer à la non-localité invoquée par la mécanique quantique afin 
+d’expliquer l'amplitude de  −𝑐𝑜𝑠(𝛥). Assimilable à un paradoxe nouveau, du genre paradoxe de Gibbs, 
+mais pour la corrélation conjointe des Bell test. 
+ 
+Principe théorique :  
+ 
+Ma variable aléatoire élémentaire par paire n’est pas 𝐴𝑖𝐵𝑖 avec 𝐴𝑖𝐵𝑖 ∈ −1, +1 ,  
+mais 𝑋𝑖 ∈ −2, +2, somme de deux produits cachés.  
+
+PAGE 4
+Tout comme Bell, je travaille explicitement avec des observables 𝐴(𝛼, 𝜆), 𝐵(𝛽, 𝜆) ∈ {−1, +1} définies 
+pour chaque réglage et chaque 𝜆, mais l’indiscernabilité introduite modifie la manière de former 
+l’observable à partir de ces variables, pas leur existence ni leur localité. 
+En conséquence la borne classique qui découle du fait que ∣ 𝑋𝑖 ∣ ≤ 2 n’est pas ∣ 𝑆 ∣ ≤ 2 , mais ∣ 𝑆 ∣ ≤ 4 
+, puisque dans un modèle local qui traiterait 𝑋 comme variable fondamentale, à chaque 𝜆 on aurait 
+|𝑋(𝑎, 𝑏, 𝜆) + 𝑋(𝑎, 𝑏′, 𝜆) + 𝑋(𝑎′, 𝑏, 𝜆) − 𝑋(𝑎′, 𝑏′, 𝜆)| ≤ 4 
+Ainsi, le fait que ∣ 𝑆 ∣≃ 2√2 ne viole aucune borne classique construite s ur la variable 𝑋 elle-même, 
+puisque 2√2 < 4 .  
+* Cependant comme l’on montré Cassio, Sozinho, et Amorim dans leur papier de 2017 : 
+Indistinguishability as non-locality constrain, il semblerait que la borne concrètement atteignable par 
+des modèles indistinguables de ce type n’est pas 4 mais la borne de Tirelson 2√2  
+ 
+De plus si l’on considère un tirage aléatoire global en ±1 avec proportion 50/50 sur les résultats 
+individuels, ce qui est typiquement le cas pour les marginals de spins dans un état singulet, où  
+𝑃( 𝐴 = ±1 ∣ 𝛼 ) =
+1
+2      ,      𝑃( 𝐵 = ±1 ∣∣ 𝛽 ) =
+1
+2  
+Quelle que soit la direction de mesure α, β.  
+Doubler toutes les "proportions" de ±1, en prenant en compte la seconde branche, ne change pas 
+les probabilités de tirage ni les statistiques marginales si cette modification est compensée 
+symétriquement. Formellement, si les résultats individuels restent strictement équilibrés, ni les 
+résultats de tirages ni les distributions marginales de A et B ne sont pas affectées par la manière dont 
+on répartit les contributions de +1 et −1 dans le modèle. 
+En revanche, ce qui change, ce sont les probabilités conjointes 𝑃( 𝐴 = +1, 𝐵 = +1 ∣∣ 𝛼, 𝛽 ) , 
+𝑃( 𝐴 = +1, 𝐵 = −1 ∣∣ 𝛼, 𝛽 ) , etc.  
+Et donc la corrélation conjointe 𝐸(𝛼, 𝛽).  Ce mécanisme modifie donc les corrélations conjointes, en 
+multipliant par 2 les contributions corrélationnelles, tout en laissant intacts les tirages individuels 
+symétriques. 
+Pour une paire donnée, la somme des probabilités des quatre issues possibles doit rester égale à 1, 
+“doubler les probabilités conjointes”, doit se faire de manière symétrique, et rester attentif à la 
+normalisation. 
+𝑃++ + 𝑃+− + 𝑃−+ + 𝑃−− = 1 
+ 
+Formalisme : 
+ 
+Dans un cadre strictement Kolmogorovien, où chaque essai correspond à une unique valeur de la 
+variable cachée 𝜆 , et où les événements 𝑔𝑑 et 𝑑𝑔 sont des sous-ensembles disjoints de l’espace 𝛬 
+des variables cachées.  
+
+PAGE 5
+L’exclusivité “ontologique” se traduit par le fait que pour chaque essai, 𝜆 ∈ 𝛬gd ou 𝜆 ∈ 𝛬dg , mais pas 
+les deux. Les probabilités associées sont alors : 
+P(gd) = ∫ ρ(λ)dλ
+𝛬gd
+         , P(dg) = ∫ ρ(λ)dλ
+𝛬dg
+ 
+Avec 𝛬gd ∩ 𝛬dg = ∅  et  𝛬gd ∪ 𝛬dg ⊆ 𝛬 
+Et P(gd) = P(dg) =
+1
+2 
+La corrélation globale usuel pour des observables locales A(α, λ), B(β, λ) ∈ −1, +1 s’écrit 
+E(α, β) = ∫ A(α, λ)B(β, λ)ρ(λ)dλΛ   
+On introduit des contributions de branche : 
+𝐶gd(α, β) = ∫ 𝐴𝑔(𝛼, 𝜆)𝐵𝑑(𝛽, 𝜆)𝜌(𝜆)𝑑𝜆𝛬gd
+,  
+Et  
+𝐶dg(α, β) = ∫ 𝐴𝑑(𝛼, 𝜆)𝐵𝑔(𝛽, 𝜆)𝜌(𝜆)𝑑𝜆𝛬dg
+,  
+ 
+L’espérance globale se décompose alors en somme de contributions sur les ensembles disjoints 𝛬gd 
+et 𝛬dg : 
+E(α, β) = 𝐶gd(α, β) + 𝐶dg(α, β) + 𝐶gg(α, β) + 𝐶dd(α, β)  
+Expérimentalement par construction, 𝑃(𝑔𝑔) = 𝑃(𝑑𝑑) = 0, seuls gd et dg sont permit. (Les 
+configurations :  Alice reçoit les 2 particules et Bob aucune, ou vice versa sont interdit pour éviter 
+tout détection Loophole). La somme se réduit donc à :  
+E(α, β) = 𝐶gd(α, β) + 𝐶dg(α, β)  
+ 
+ 
+L’espérance globale 𝐸(𝛼, 𝛽) devient donc :  
+ 
+E(α, β) = ∫ [𝐴𝑔(𝛼, 𝜆)𝐵𝑑(𝛽, 𝜆) + 𝐴𝑑(𝛼, 𝜆)𝐵𝑔(𝛽, 𝜆)]𝜌(𝜆)𝑑𝜆
+Λ
+ 
+ 
+ 
+Si  𝑃(𝑔𝑑) = 𝑃(𝑑𝑔) =
+1
+2 et 𝐶gd = 𝐶dg = −
+1
+2 𝑐𝑜𝑠(𝛼 − 𝛽)  
+On a : 
+𝐸(𝛼, 𝛽) = 𝐶𝑔𝑑 + 𝐶𝑑𝑔 = 2𝐶𝑔𝑑 = −𝑐𝑜𝑠(𝛼 − 𝛽) 
+
+PAGE 6
+Rôle de l’indiscernabilité 
+Pour chaque paire, on calcule simultanément quatre valeurs (𝐴𝑔, 𝐴𝑑, 𝐵𝑔, 𝐵𝑑). Dans une lecture 
+ontologique, on peut dire que l’état de la paire est (ϕ𝑔, ϕ𝑑, A, B), ce qui fixe déterministiquement 
+ces quatre résultats pour un réglage donné. Si l’on restait dans le cadre standard d’un modèle à 
+variables cachées, on n’utiliserait qu’une seule combinaison de ces résultats pour représenter la 
+mesure effectivement réalisée par le montage. Par exemple, si la particule “gauche” va vers Alice et 
+la “droite” vers Bob, on pourrait identifier 𝐴 à 𝐴𝑔 et 𝐵 à 𝐵𝑑, et donc utiliser la corrélation à ⟨𝐴𝑔𝐵𝑑⟩ 
+uniquement.  
+Dans mon modèle, l’indiscernabilité empêche d’identifier la corrélation observable à cette seule 
+combinaison, parce que l’expérimentateur ne sait pas si, dans un essai donné, la paire a été émise 
+sous la forme “Alice reçoit g, Bob d ” ou “Alice d, Bob g ”, les 2 peuvent arriver et sont indiscernables 
+pour l’expérimentateur. Pour la corrélation conjointe il faut donc combiner les deux produits 𝐴𝑔𝐵𝑑 
+et 𝐴𝑑𝐵𝑔 dans le numérateur.  
+Ce faisant, le calcul devient analogue à ce qui se passe en interférence multi-chemins : lorsque deux 
+chemins quantiques sont indiscernables, on ne les traite pas comme des alternatives exclusives à 
+additionner classiquement, mais comme deux contributions d’un seul et même événement détecté. 
+La différence est que, dans l’interférence quantique, on additionne des amplitudes complexes, alors 
+qu’ici j’additionnes des produits ±1 dans le numérateur de la corrélation. 
+Autrement dit, dans un cadre d’indiscernabilité totale, l’observable de corrélation conjointe E n’est 
+pas la moyenne simple des produits 𝐴𝐵, mais la moyenne pondérée des permutations possibles  
+ 
+Analogies classiques  
+ 
+Je rappel le formalisme de mon model : 
+ 𝐸𝐼 =  1
+𝑁𝑝𝑎𝑖𝑟
+ ∑ (𝑋𝑖
+𝑔𝑑 + 𝑋𝑖
+𝑑𝑔)
+𝑁𝑝𝑎𝑖𝑟
+𝑖=1
+  
+ 
+1. Physique statistique : micro-états et macro-états 
+Ce formalisme est parfaitement analogue à la description des macro-états en physique statistique. 
+L'idée clé est que dans le calcul d'observables macroscopiques, on somme sur tous les micro-états 
+compatibles avec le macro-état observé, sans les distinguer. Si une observable O prend des valeurs 
+O𝑖 sur les micro-états i compatibles avec le macro-état M, alors : 
+ 
+⟨𝑂⟩𝑀 =  1
+𝛺(𝑀) ∑ O𝑖
+𝑖∈𝑀
+ 
+ 
+
+PAGE 7
+2. Inférence bayésienne avec scores non normalisés  
+En inférence bayésienne, on manipule souvent des scores ou vraisemblances non normalisées 𝝎𝒊 
+qui ne somment pas à 1, et qu'on renormalise en probabilités à la fin 
+Dans certains algorithmes (importance sampling, échantillonnage pondéré), on calcule des 
+espérances de la forme : 
+⟨𝑓⟩ =   
+∑𝝎𝒊𝑖 𝒇𝒊
+∑𝝎𝒊𝑖
+  
+C’est formellement très proche de mon formalisme  
+𝑬𝑰(𝛼, 𝛽) =
+𝐶gd(𝛼, 𝛽) + 𝐶dg(𝛼, 𝛽)
+𝑃(𝑔𝑑) + 𝑃(𝑑𝑔)  
+Avec 𝑃(𝑔𝑑) = 𝑃(𝑑𝑔) =
+1
+2 
+Si l'on interprète les 𝐶gd 𝑒𝑡 𝐶dg comme des "scores corrélationnels" non normalisés, alors la 
+corrélation conjointe 𝐸(𝛼, 𝛽) est une normalisation par la somme des poids des branches, standard 
+en estimation bayésienne par échantillonnage pondéré. 
+ 
+3. Arbres de décision avec branches non normalisées 
+Certains logiciels de décision (notamment dans le domaine de l'aide à la décision et de l'évaluation 
+de risques) permettent de spécifier des arbres dont les probabilités de branches ne somment pas à 
+1, soit parce qu'elles représentent des fréquences relatives plutôt que des probabilités, soit parce 
+qu'elles agrègent des scénarios non exhaustifs (comme moi). Dans certains cadres (théorie de 
+Dempster-Shafer, fonctions de croyance), on manipule explicitement des masses de croyance qui ne 
+respectent pas l'additivité classique si les éléments de A et B sont indiscernables au niveau de 
+l'évidence disponible. 
+𝑚(𝐴) + 𝑚(𝐵) ≠ 𝑚(𝐴 ∪ 𝐵) 
+Dans ce cadre, des "événements" indiscernables peuvent contribuer doublement à la croyance d'un 
+ensemble plus large, comme mes branches gd et dg contribuent doublement à la corrélation 
+conjointe observée.  
+Cette analogie statistique est, au sens strict, non kolmogorovienne. Cette analogie est donc plus 
+spéculative, mais elle montre qu’il existe des cadres mathématiques où l’agrégation d’“évidence” ne 
+suit pas la simple additivité classique 
+ 
+4. Le paradoxe de Gibbs et l'extensivité de l'entropie 
+C’est aussi analogue au paradoxe de Gibbs en physique statistique, lorsqu'on traite des particules 
+identiques comme discernables : l'entropie devient non extensive, ce qui "contredit la 
+
+PAGE 8
+thermodynamique". La résolution consiste à diviser le comptage des micro-états par N! pour tenir 
+compte de l'indiscernabilité. 
+Cette correction N! ne change pas les statistiques individuelles, mais elle modifie profondément les 
+propriétés des grandeurs agrégées (entropie, énergie libre). C'est donc équivalent à ma "nouvelle" 
+observable corrélationnelle. C'est un précédent historique : L'indiscernabilité statistique peut 
+modifier les observables agrégées sans modifier les observables individuelles. 
+ 
+5. Mécanique statistique des systèmes indiscernables quantique : Bose-Einstein et Fermi-
+Dirac 
+ 
+Ici c’est une analogie structurelle forte, les branches gd et dg sont indiscernables au niveau du 
+comptage statistique, exactement comme deux particules identiques en occupation (g,d) et (d,g) le 
+sont en statistique quantique. Et cette indiscernabilité au niveau du comptage produit des 
+corrélations renforcées par rapport au cas classique discernable. 
+Notons également que la statistique de Bose-Einstein, bien qu'historiquement issue de la mécanique 
+quantique, peut être formalisée comme une règle de comptage classique alternative (Planck l'a fait 
+avant l'apparition de la mécanique quantique). Ce modèle peut, dans cet esprit, être vu comme une 
+règle de comptage alternative pour les paires EPR, où l'indiscernabilité des branches gd et dg produit 
+naturellement les corrélations quantiques observées.   
+Notons également qu’en mécanique quantique, l'obtention de l'information sur le chemin (which-
+path information) détruit l'interférence ou l'intrication. C'est le phénomène de décohérence. Si l'on 
+rend les chemins discernables, la corrélation quantique chute et ne suit plus −𝑐𝑜𝑠(𝛥). Ce modèle 
+reproduit donc qualitativement aussi cette caractéristique sans nécessité un postulat type 
+décohérence. 
+ 
+ 
+Prédiction expérimentale : la transition discernable / indiscernable et la signature N! 
+ 
+L'extension à N particules (test de cohérence) 
+Pour montrer que le facteur 2 n'est pas magique, nous pouvons esquisser la généralisation :  
+Pour 3 paires indiscernables avec permutations cycliques, le facteur serait 3! = 6, etc. 
+Le cas général N : Si l'indiscernabilité s'applique à N entités, la mesure Q a une masse N!, la 
+corrélation effective serait amplifiée par ce facteur. La QM standard, ne produit pas cette 
+amplification factorielle pour les corrélations de Bell. Ce modèle n'est pas une simple reformulation 
+mathématique de la borne LHV, mais une théorie alternative falsifiable. Pour N≥3, les prédictions 
+divergent radicalement. 
+ 
+
+PAGE 9
+Reste à faire : si jamais les expériences sur les inégalités de Mermin (GHZ ou autres) invalident cette 
+prédiction expérimentale, chercher si j’ai fait une erreur de résonnement et si une explication 
+physique cohérentes peut suivre la prédiction usuelle de la QM, qui je crois devrait plutôt prédire 
+une généralisation du type : 2N-1 ⋅ √2 
+ 

@@ -1,0 +1,154 @@
+{
+  "version": "2.0",
+  "coherence": 1.0,
+  "pairs_per_setting": 200000,
+  "seed": 20260916,
+  "scope": "Joint sampler using both settings; not an autonomous local detector dynamics.",
+  "formula": "E_c=-(1+c)/2*cos(a-b)",
+  "outcome_order": [
+    "++",
+    "+-",
+    "-+",
+    "--"
+  ],
+  "chsh": {
+    "contexts": [
+      {
+        "N": 200000,
+        "counts_pp_pm_mp_mm": [
+          14530,
+          85148,
+          85673,
+          14649
+        ],
+        "joint_pp_pm_mp_mm": [
+          0.07265,
+          0.42574,
+          0.428365,
+          0.073245
+        ],
+        "E": -0.70821,
+        "E_stderr": 0.0015786681030222913,
+        "marginal_A_plus": 0.49839,
+        "marginal_B_plus": 0.501015,
+        "alpha": 0,
+        "beta": 0.7853981633974483,
+        "expected_E": -0.7071067811865476
+      },
+      {
+        "N": 200000,
+        "counts_pp_pm_mp_mm": [
+          14772,
+          85053,
+          85495,
+          14680
+        ],
+        "joint_pp_pm_mp_mm": [
+          0.07386,
+          0.425265,
+          0.427475,
+          0.0734
+        ],
+        "E": -0.70548,
+        "E_stderr": 0.001584768073883368,
+        "marginal_A_plus": 0.499125,
+        "marginal_B_plus": 0.501335,
+        "alpha": 0,
+        "beta": -0.7853981633974483,
+        "expected_E": -0.7071067811865476
+      },
+      {
+        "N": 200000,
+        "counts_pp_pm_mp_mm": [
+          14512,
+          85176,
+          85518,
+          14794
+        ],
+        "joint_pp_pm_mp_mm": [
+          0.07256,
+          0.42588,
+          0.42759,
+          0.07397
+        ],
+        "E": -0.70694,
+        "E_stderr": 0.0015815116762136153,
+        "marginal_A_plus": 0.49844,
+        "marginal_B_plus": 0.50015,
+        "alpha": 1.5707963267948966,
+        "beta": 0.7853981633974483,
+        "expected_E": -0.7071067811865476
+      },
+      {
+        "N": 200000,
+        "counts_pp_pm_mp_mm": [
+          85105,
+          14604,
+          14650,
+          85641
+        ],
+        "joint_pp_pm_mp_mm": [
+          0.425525,
+          0.07302,
+          0.07325,
+          0.428205
+        ],
+        "E": 0.70746,
+        "E_stderr": 0.0015803486140722241,
+        "marginal_A_plus": 0.498545,
+        "marginal_B_plus": 0.498775,
+        "alpha": 1.5707963267948966,
+        "beta": -0.7853981633974483,
+        "expected_E": 0.7071067811865475
+      }
+    ],
+    "S_signed": -2.82809,
+    "S_abs": 2.82809,
+    "stderr": 0.003162651380013295,
+    "expected_abs": 2.8284271247461903
+  },
+  "curve_RMSE_vs_model": 0.001364681444773736,
+  "curve_RMSE_vs_singlet": 0.001364681444773736,
+  "maximum_marginal_deviation": 0.003489999999999993,
+  "convergence": {
+    "slope": -0.5192154613390791,
+    "slope_stderr": 0.01695041625440101,
+    "N": [
+      625,
+      1250,
+      2500,
+      5000,
+      10000,
+      20000,
+      40000,
+      80000,
+      160000,
+      320000
+    ],
+    "rmse": [
+      0.0257433490907518,
+      0.019079787089009235,
+      0.01319191169456994,
+      0.010805454179978384,
+      0.006303301843436459,
+      0.004406631207092948,
+      0.002800361264241861,
+      0.002470738276467166,
+      0.0013007433855606453,
+      0.0011729172375717434
+    ]
+  },
+  "journal_note": "First 1000 trials of each CHSH context; full counts in this JSON.",
+  "figures": [
+    "fig1_E_vs_delta.png",
+    "fig2_branches.png",
+    "fig3_CHSH.png",
+    "fig4_convergence.png",
+    "fig5_probabilites.png",
+    "fig6_coherence.png"
+  ],
+  "python": "3.12.2",
+  "numpy": "1.26.4",
+  "matplotlib": "3.8.3",
+  "source_sha256": "475219f93279da19295de4daf57d826c54cd91822df7eb78d02e817ca68c48bc"
+}
