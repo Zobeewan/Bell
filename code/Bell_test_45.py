@@ -11,9 +11,10 @@ import csv
 import hashlib
 import json
 import platform
+from typing import NamedTuple
 import numpy as np
 
-VERSION = "2.0"
+VERSION = "2.1"
 OUTCOMES = ((1,1),(1,-1),(-1,1),(-1,-1))
 
 def validate_coherence(c):
@@ -50,23 +51,53 @@ def joint_probabilities(alpha,beta,coherence=1.):
     e=theoretical_E(alpha,beta,coherence)
     return np.stack([(1+s*t*e)/4 for s,t in OUTCOMES],axis=-1)
 
-def sample_joint_pairs(alpha,beta,N_pairs,rng,coherence=1.):
-    """Un couple de signes par essai, sans tri ni poids.
-    P(s,t|a,b,phi)=[1+st*E_phi]/4. L'ordre algorithmique A puis B
-    n'est pas une hypothese de causalite physique. Le generateur connait a et b.
+class PreparedSource(NamedTuple):
+    phi: np.ndarray
+    alice_sign: np.ndarray
+    agreement_uniform: np.ndarray
+
+
+def prepare_source(N_pairs,rng):
+    """Prepare tous les aleas sans recevoir aucun reglage.
+
+    Etat statistique (phi, R, U), pas un modele de particule ou de champ.
+    Les reglages peuvent etre tires APRES cet appel avec un autre generateur.
     """
-    c=validate_coherence(coherence)
     if not isinstance(N_pairs,(int,np.integer)) or N_pairs<1:
         raise ValueError("N_pairs doit etre un entier strictement positif.")
     phi=rng.uniform(-np.pi,np.pi,N_pairs)
+    r=np.where(rng.random(N_pairs)<.5,1,-1).astype(np.int8)
+    return PreparedSource(phi,r,rng.random(N_pairs))
+
+
+def respond_joint(alpha,beta,source,coherence=1.):
+    """Reponse deterministe a l'etat prepare ; acces EXPLICITE aux deux angles.
+
+    A=R ; B=R si U < (1+E_phi(alpha,beta))/2, sinon B=-R.
+    Preparer les aleas en avance assure leur independance des choix, mais
+    ne retire pas la dependance de B au reglage alpha. Aucun champ n'evolue.
+    Accepte aussi des tableaux de reglages, un choix par essai.
+    """
+    c=validate_coherence(coherence)
+    phi,a,u=source
     pop,cross=correlation_components(alpha,beta,phi,c)
     e=pop+cross
     if np.any(~np.isfinite(e)) or np.any(np.abs(e)>1+1e-12):
         raise ValueError("Esperance conditionnelle invalide.")
-    a=np.where(rng.random(N_pairs)<.5,1,-1).astype(np.int8)
-    agree=rng.random(N_pairs)<np.clip((1+e)/2,0,1)
+    agree=u<np.clip((1+e)/2,0,1)
     b=np.where(agree,a,-a).astype(np.int8)
     return a,b,phi,pop,cross
+
+
+def sample_joint_pairs(alpha,beta,N_pairs,rng,coherence=1.):
+    """Echantillonneur conjoint historique, equivalent a preparation + reponse.
+
+    Un couple AB par essai. L'ordre des nombres aleatoires est conserve depuis
+    la v2.0 pour rendre les resultats precedents exactement reproductibles.
+    L'interface respond_joint permet de choisir les angles apres preparation.
+    """
+    validate_coherence(coherence)
+    return respond_joint(alpha,beta,prepare_source(N_pairs,rng),coherence)
 
 def summarize_pairs(a,b):
     n=len(a); e=float(np.mean(a*b))
@@ -239,4 +270,3 @@ def main(argv=None):
 
 if __name__=='__main__':
     main()
-

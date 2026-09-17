@@ -1,5 +1,5 @@
 {
-  "version": "2.0",
+  "version": "2.1",
   "coherence": 1.0,
   "pairs_per_setting": 200000,
   "seed": 20260916,
@@ -147,8 +147,8 @@
     "fig5_probabilites.png",
     "fig6_coherence.png"
   ],
-  "python": "3.12.2",
-  "numpy": "1.26.4",
-  "matplotlib": "3.8.3",
-  "source_sha256": "475219f93279da19295de4daf57d826c54cd91822df7eb78d02e817ca68c48bc"
+  "python": "3.12.14",
+  "numpy": "2.5.3",
+  "matplotlib": "3.11.2",
+  "source_sha256": "33708a84737c23e3a21e3e5a8bc4472f08cf033b59b670b24e7043ed39d80b8d"
 }

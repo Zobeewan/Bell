@@ -1,8 +1,8 @@
 # Cohérence de paire et corrélations de Bell
 
-Version 2 de Bell Indistinguishability
+Version 2.1 de Bell Indistinguishability
 
-16 septembre 2026
+17 septembre 2026
 
 ## Résumé
 
@@ -112,11 +112,11 @@ Le programme utilise c = 1 par défaut. Les autres valeurs servent à explorer l
 
 L'équilibre 50/50 décrit chaque liste de résultats. Il ne détermine pas leur appariement : deux listes équilibrées peuvent être corrélées, indépendantes ou anticorrélées. Pour des signes à marginales équilibrées, la distribution conjointe est entièrement déterminée par E. Il n'existe pas de paramètre supplémentaire caché dans ses quatre cases.
 
-La simulation v2 génère explicitement une paire selon la loi conditionnelle à φ. Elle tire d'abord φ, calcule Eφ,c, puis procède ainsi :
+La simulation prépare φ, un signe équitable R et un uniforme U sans recevoir de réglage. Les angles peuvent ensuite être choisis indépendamment. La réponse utilise la loi conditionnelle à φ :
 
-1. Tirer A = +1 ou −1 avec probabilité 1/2.
-2. Tirer un uniforme r entre 0 et 1.
-3. Poser B = A si r < (1+Eφ,c)/2 ; sinon poser B = −A.
+1. Poser A = R, le signe préparé avec probabilité 1/2.
+2. Calculer Eφ,c avec les deux réglages a et b.
+3. Poser B = A si U < (1+Eφ,c)/2 ; sinon poser B = −A.
 4. Enregistrer une seule fois A, B et le produit AB.
 
 Cet ordre est une méthode d'échantillonnage conjoint. Il n'attribue pas une direction causale physique entre les deux détecteurs. Le calcul de l'accord utilise a et b ; il n'est pas une implémentation de deux fonctions de réponse locales indépendantes.
@@ -129,7 +129,7 @@ Aucune paire n'est rejetée et aucun poids n'est ajouté. Les marginales sont 50
 
 ### 4.1 Ce qui change par rapport à la première version
 
-La v1 ajoutait deux scores de branche. La v2 calcule les contributions de populations et de cohérence pour définir la probabilité de la paire, puis utilise le comptage habituel sur les signes effectivement tirés. Elle ne modifie pas rétrospectivement la fréquence d'une paire déjà enregistrée. Tirer séparément deux marginales à 50/50 sans spécifier leur couplage ne réaliserait pas la loi recherchée.
+La v1 ajoutait deux scores de branche. La v2 calcule les contributions de populations et de cohérence pour définir la probabilité de la paire, puis utilise le comptage habituel sur les signes effectivement tirés. Elle ne modifie pas rétrospectivement la fréquence d'une paire déjà enregistrée.
 
 ### 4.2 Résultats de la simulation de référence
 
@@ -146,13 +146,45 @@ Paramètres : c = 1 ; graine 20260916 ; 200 000 paires par réglage ; 73 valeurs
 
 <!-- page -->
 
+## 4.3 Préparation, choix et dépendances PI/OI
+
+La fonction prepare_source prépare les variables (φ, R, U). respond_joint reçoit ensuite les angles et cet état. sample_joint_pairs conserve une interface compacte équivalente. Aucune équation de mouvement, mémoire d'onde ou dynamique de détecteur ne produit ici la probabilité d'accord : elle est prescrite par la loi cible. Dans l'ancienne interface, tirer φ après réception des angles n'induisait pas à lui seul une dépendance statistique : sa distribution uniforme ne dépendait pas de leurs valeurs.
+
+À description cachée fixée, l'indépendance des paramètres (PI) exige que la marginale conditionnelle d'un côté ne dépende pas du réglage de l'autre. L'indépendance des résultats (OI) exige que connaître l'autre résultat n'ajoute pas d'information une fois les deux réglages et λ fixés. Leur conjonction équivaut à la factorisation [11].
+
+Avec λ = φ et e = Eφ,c, le noyau conjoint est :
+
+$$
+P(s,t\mid a,b,\phi)=\frac{1+st e}{4},\qquad P_A(s\mid a,b,\phi)=P_B(t\mid a,b,\phi)=\frac{1}{2}.
+$$
+
+PI est satisfaite des deux côtés. OI échoue lorsque e est non nul : conditionner sur A change la probabilité de B. Avec la description enrichie λ = (φ, R), A est déjà déterminé et :
+
+$$
+A=R,\qquad P(B=t\mid a,b,\phi,R)=\frac{1+Rt E_{\phi,c}(a,b)}{2}.
+$$
+
+OI est alors satisfaite, mais PI échoue chez Bob : la probabilité dépend de a. Inclure aussi U rend les deux réponses déterministes ; le seuil U < (1+e)/2 conserve cette dépendance. Remplacer ce seuil par le seul signe de e ne reproduirait pas les fréquences intermédiaires.
+
+| Description cachée du même sampler | PI Alice / Bob | OI |
+|---|---|---|
+| φ ; R et U moyennés | oui / oui | non en général |
+| φ, R ; U moyenné | oui / non | oui |
+| φ, R, U | oui / non | oui |
+
+Ces représentations donnent les mêmes fréquences observables. Le diagnostic PI/OI dépend donc du niveau de description. Il ne s'agit pas d'une identité générale entre PI et OI : à λ fixé, ce sont deux conditions distinctes. Même le statut de la factorisation peut changer quand λ change ; deux copies d'un signe classique sont dépendantes sans ce signe dans λ, mais déterministes et factorisables conditionnellement à lui.
+
+Ce qui reste une identité est « PI et OI équivalent à la factorisation », pour chaque description donnée. Dans notre sampler, toutes les représentations ci-dessus restent non factorisables. Les choix peuvent être statistiquement indépendants de la source, les marginales rester 50/50, et une dépendance conditionnelle de B envers a subsister.
+
+<!-- page -->
+
 ## 5 Courbe angulaire et décomposition
 
-![Figure 1](../../simu/resultats_bell45_v2/fig1_E_vs_delta.png)
+![Figure 1](../code/resultats_bell45_v2/fig1_E_vs_delta.png)
 
 *Figure 1. Moyennes des produits AB réellement enregistrés, à c = 1. La référence de branche conserve les tirages indépendants du code initial. Les barres représentent des intervalles normaux ponctuels à 95 %.*
 
-![Figure 2](../../simu/resultats_bell45_v2/fig2_branches.png)
+![Figure 2](../code/resultats_bell45_v2/fig2_branches.png)
 
 *Figure 2. Contributions à l'espérance. À c = 1, les deux demi-amplitudes se superposent presque après intégration numérique. Leur somme est une espérance de paire, et non la somme de deux clics par essai.*
 
@@ -160,11 +192,11 @@ Paramètres : c = 1 ; graine 20260916 ; 200 000 paires par réglage ; 73 valeurs
 
 ## 6 CHSH et convergence
 
-![Figure 3](../../simu/resultats_bell45_v2/fig3_CHSH.png)
+![Figure 3](../code/resultats_bell45_v2/fig3_CHSH.png)
 
 *Figure 3. CHSH calculé sur quatre échantillons distincts. L'incertitude du tableau est à un écart-type ; la barre d'erreur du graphique représente 1,96 écart-type. La barre grise est une borne de référence. Le générateur conjoint satisfait la loi du singulet à c = 1.*
 
-![Figure 4](../../simu/resultats_bell45_v2/fig4_convergence.png)
+![Figure 4](../code/resultats_bell45_v2/fig4_convergence.png)
 
 *Figure 4. Convergence de 625 à 320 000 paires par réglage. La référence est la racine de la moyenne de (1−E²)/N sur la grille. L'erreur décroît comme N à la puissance −1/2. L'incertitude de pente est celle de la régression, pas une incertitude systématique.*
 
@@ -172,11 +204,11 @@ Paramètres : c = 1 ; graine 20260916 ; 200 000 paires par réglage ; 73 valeurs
 
 ## 7 Probabilités marginales et contrôle de cohérence
 
-![Figure 5](../../simu/resultats_bell45_v2/fig5_probabilites.png)
+![Figure 5](../code/resultats_bell45_v2/fig5_probabilites.png)
 
 *Figure 5. Les quatre fréquences conjointes suivent la loi normalisée tandis que les deux marginales fluctuent autour de 1/2. Les courbes ++ et −−, ainsi que +− et −+, se superposent théoriquement. La bande grise est ponctuelle ; ce n'est pas une bande simultanée couvrant toute la grille.*
 
-![Figure 6](../../simu/resultats_bell45_v2/fig6_coherence.png)
+![Figure 6](../code/resultats_bell45_v2/fig6_coherence.png)
 
 *Figure 6. Famille analytique de visibilité V = (1+c)/2. Ces courbes ne sont pas cinq expériences supplémentaires. Un contrôle numérique distinct à c = 1/2 et 20 000 paires par réglage donne |S| = 2,1204 ± 0,0120, contre 2,1213 attendu.*
 
@@ -224,23 +256,68 @@ Le maximum 2 de la corrélation d'intensité normalisée comporte un fond et une
 
 <!-- page -->
 
+## 8.4 Deux polariseurs en parallèle
+
+Deux faisceaux préparés ensemble arrivent chacun sur un analyseur à deux sorties. Les angles physiques sont α et β ; les angles de Bloch sont a = 2α et b = 2β. On conserve les deux sorties de chaque analyseur, sans sélectionner seulement les transmissions. Une source fournit les polarisations θ et θ+π/2, avec θ uniforme. Les deux champs peuvent avoir une phase relative fixe : aucune incohérence optique n'est nécessaire au calcul qui suit.
+
+Les fractions d'intensité dans la sortie + obéissent à Malus. Pour produire un signe par côté, nous posons explicitement une règle de routage proportionnelle à ces intensités, avec des uniformes locaux indépendants conditionnellement à la source :
+
+$$
+P(A=+1\mid\alpha,\theta)=\cos^2(\alpha-\theta),\qquad
+P(B=+1\mid\beta,\theta)=\sin^2(\beta-\theta).
+$$
+
+La phase optique commune disparaît du carré du module de chaque projection. Sa stabilité ne crée donc pas le terme croisé entre configurations de paire utilisé en section 3. Le paramètre c de cette section ne mesure pas simplement la cohérence optique entre deux faisceaux séparés.
+
+$$
+E_{\mathrm{par}}(\alpha,\beta)
+=-\int_0^\pi\frac{d\theta}{\pi}\cos(2\alpha-2\theta)\cos(2\beta-2\theta)
+=-\frac{1}{2}\cos\left(2(\alpha-\beta)\right).
+$$
+
+Des polarisations identiques donnent le signe opposé. Pour les polarisations orthogonales retenues ici, changer β peut changer B, donc AB, sans changer A. Ce comportement est entièrement local et produit déjà une corrélation dépendant de la différence des angles. Il donne une demi-amplitude dans ce modèle précis.
+
+Deux intensités continues ne sont pas spontanément deux événements binaires. Le résultat précédent utilise la règle de détection indiquée ; d'autres règles donnent d'autres courbes. À titre de contrôle, une réponse déterministe au signe de cos(a−φ), avec le signe opposé chez Bob, donne une corrélation triangulaire :
+
+$$
+E_{\mathrm{seuil}}(a,b)=-1+\frac{2|a-b|}{\pi},\qquad |a-b|\leq\pi.
+$$
+
+Cette règle à seuil n'est pas la loi de Malus. Elle atteint |S| = 2 pour les angles CHSH retenus. Le facteur 1/2 n'est donc pas une limite universelle des corrélations classiques ; il caractérise la source et les réponses de Malus choisies.
+
+Le fait qu'un produit change lorsqu'un seul de ses facteurs change n'implique aucune influence à distance. Il n'établit pas davantage que toutes les fréquences du singulet sont réalisées : l'amplitude et les probabilités conjointes doivent encore être calculées.
+
+<!-- page -->
+
+## 8.5 Contrôle numérique après préparation
+
+Le script audit_locality.py prépare tous les aléas avant de choisir, pour chaque essai, les deux réglages avec un générateur distinct. Il enregistre un million d'essais sans rejet. Les angles de Bloch sont les mêmes qu'en section 4.2. Les deux réponses de Malus ont des interfaces séparées : chacune reçoit seulement son angle et ses variables préparées.
+
+![Figure 7](../code/resultats_locality/comparison.png)
+
+*Figure 7. Lois analytiques et moyennes numériques ; à droite, CHSH calculé après des choix aléatoires postérieurs à la préparation. Les barres indiquent 1,96 écart-type. Les points des courbes réutilisent une population préparée de 80 000 essais et ne sont donc pas indépendants entre angles.*
+
+| Modèle | S observé (1 écart-type) | S théorique |
+|---|---|---|
+| Générateur conjoint, c = 1 | 2,82627 ± 0,00283 | 2,82843 |
+| Polariseurs parallèles, Malus | 1,41411 ± 0,00374 | 1,41421 |
+| Réponses locales à seuil | 1,99841 ± 0,00347 | 2 |
+
+Un second contrôle réutilise exactement les mêmes états préparés, y compris les aléas des détecteurs. À b = 0, remplacer a = 0 par a = π inverse tous les signes B du générateur conjoint à c = 1 ; il n'en modifie aucun dans les deux modèles parallèles. Remplacer b à a fixé ne modifie aucun signe A, dans les trois modèles. Les marginales moyennées ne révèlent pas nécessairement ces dépendances conditionnelles.
+
+Le générateur conjoint est donc compatible avec une préparation antérieure aux choix, mais sa réponse reste contextuelle aux deux réglages. La chronologie des tirages ne le transforme pas en dynamique de deux faisceaux séparés.
+
+<!-- page -->
+
 ## 9 Indiscernabilité comptage et mémoire
 
-### 9.1 Micro états poids et paradoxe de Gibbs
-
-La distinction entre micro-états et macro-états rappelle qu'une observable doit être calculée sur les événements physiques effectivement distingués. Si plusieurs descriptions correspondent au même événement, il faut transformer ensemble le comptage et la normalisation. De même, une moyenne pondérée divise la somme des contributions par la somme des poids.
-
-Le paradoxe de Gibbs est pertinent comme avertissement sur le choix des états comptés et la signification de la distinguabilité. Ses formulations classiques et quantiques font l'objet d'analyses distinctes [9]. Il ne fournit pas une règle permettant de doubler une corrélation AB en conservant les mêmes fréquences observées.
-
-Les analogies de la v1 avec des scores bayésiens ou des arbres de décision sont donc retenues comme analogies de représentation, pas comme mécanismes de détection. Une masse de croyance et une probabilité de clic n'ont pas le même rôle.
-
-### 9.2 Symétrie échange et information de branche
+### 9.1 Symétrie échange et information de branche
 
 Les effets d'échange en mécanique quantique concernent des amplitudes symétrisées ou antisymétrisées. L'ignorance d'une étiquette n'ajoute pas automatiquement un terme d'interférence. Pour la famille présente, il faut une cohérence entre les deux configurations pertinentes ; une information de branche conservée dans l'environnement peut réduire cette cohérence.
 
-L'article de Cássio Sozinho Amorim examine le lien entre indistinguabilité informationnelle et contraintes de non-localité [10]. Il ne démontre pas qu'une somme de scores locaux à valeurs ±1 reproduit les détections du singulet. Cette référence soutient l'intérêt de la question structurelle, sans valider la règle de comptage de la première version.
+L'article de Cássio Sozinho Amorim examine le lien entre indistinguabilité informationnelle et contraintes de non-localité [10]. Cette référence soutient l'intérêt de la question structurelle.
 
-### 9.3 Synchronisation et mémoire dans les gouttelettes
+### 9.2 Synchronisation et mémoire dans les gouttelettes
 
 Papatryfonos et collègues obtiennent un dépassement statique d'une expression de Bell dans un système de gouttelettes couplées par des ondes [7]. Les réglages géométriques participent à la dynamique commune. Ces résultats motivent l'étude d'une mémoire physique capable de porter des corrélations.
 
@@ -250,9 +327,33 @@ Le rapprochement proposé est un programme de recherche : déterminer si une obs
 
 <!-- page -->
 
-## 10 Prédictions et prolongements
+## 10 Portée des résultats et notion de localité
 
-### 10.1 Une perturbation discriminante
+### 10.1 Une information propre à la paire
+
+Les variations de cohérence étudiées sont invisibles dans les marginales, mais visibles dans les statistiques conjointes. Cette formulation est justifiée pour notre famille. Elle ne caractérise pas à elle seule une violation de Bell : deux copies d'une pièce classique ont aussi une corrélation invisible dans chaque marginale. Le dépassement d'une borne concerne plusieurs contextes de mesure.
+
+### 10.2 Le statut du terme c
+
+La cohérence complète un modèle initial limité aux populations. Elle n'est pas un terme oublié dans le théorème de Bell : λ peut déjà contenir une phase, une mémoire, une synchronisation et toutes les variables communes de préparation. Ajouter c à λ n'impose pas le noyau conjoint de la section 3. Ce noyau a été construit à partir d'un état quantique, puis échantillonné ; aucune dynamique classique locale autonome ne l'a encore dérivé ici.
+
+### 10.3 Plusieurs critères physiques à distinguer
+
+La factorisation conditionnelle de Bell est plus exigeante que l'invariance des marginales observées ou l'absence de communication après un découplage. La critiquer comme définition générale de la localité est une discussion possible ; l'appeler superflue effacerait les hypothèses qui déterminent les prédictions. Dans un modèle classique séparé, avec état causal complet, choix indépendants et réponses locales, la mémoire commune est déjà incluse dans λ. Une factorisation peut échouer si l'on en moyenne une partie ou si le protocole introduit un autre lien causal.
+
+### 10.4 Ce que signifie la borne de Tsirelson
+
+La valeur 2√2 borne CHSH dans le formalisme quantique bipartite usuel [12]. Une valeur numérique identique obtenue dans une analogie classique ne démontre pas un mécanisme non local, ni une limite classique générale. La prépublication [8] rapporte notamment S proche de 3,15 en régime statique, au-dessus de 2√2 : elle ne peut donc justifier cette valeur comme plafond universel des systèmes synchronisés. La borne |S| ≤ 2 reste celle des modèles factorisables avec choix indépendants ; elle n'est pas une borne de tous les protocoles classiques imaginables.
+
+### 10.5 Une question physique toujours ouverte
+
+Le théorème ne clôt pas toutes les questions sur une description sous-jacente de la physique quantique. Les gouttelettes constituent des mécanismes classiques explicites de corrélation et une piste pour étudier la mémoire. Les résultats cités et notre sampler n'établissent toutefois pas un mécanisme local reproduisant l'ensemble des tests de Bell avec choix indépendants. Une proposition plus forte doit préciser sa dynamique, ses dépendances et le protocole expérimental auquel elle s'applique. C'est dans ce sens défini que le programme reste ouvert.
+
+<!-- page -->
+
+## 11 Prédictions et prolongements
+
+### 11.1 Une perturbation discriminante
 
 Une première expérience numérique consisterait à perturber la phase relative ou une variable de mémoire tout en contrôlant que les distributions individuelles restent identiques. Dans la famille de référence, la visibilité V et la cohérence c sont reliées par :
 
@@ -264,7 +365,7 @@ $$
 
 Cette loi n'est une prédiction du modèle physique futur que si c y est défini et mesuré indépendamment des corrélations que l'on cherche à expliquer. Déduire c de V puis retrouver V avec la formule ne constituerait pas un test.
 
-### 10.2 Une mesure hors du plan
+### 11.2 Une mesure hors du plan
 
 La moyenne planaire de la famille possède le tenseur de corrélation suivant, dans les axes x, y et z :
 
@@ -274,19 +375,19 @@ $$
 
 Une mesure sur l'axe y donne donc Tyy = 1−2V. Une famille isotrope de type Werner aurait au contraire −V sur les trois axes. Deux modèles présentant la même courbe dans un plan peuvent ainsi être distingués par une mesure supplémentaire. À c = 1, l'état redevient le singulet isotrope.
 
-### 10.3 Plusieurs particules
+### 11.3 Plusieurs particules
 
 Nous ne conservons pas l'extrapolation factorielle N! de la première version. Pour plusieurs configurations, le carré du module d'une somme d'amplitudes contient des populations et des termes croisés dont les signes, les phases et la normalisation doivent être calculés. Leur nombre ne donne pas directement un facteur multiplicatif pour une corrélation normalisée.
 
 Une extension à trois systèmes devrait partir d'un état ou d'une dynamique explicitement définis, calculer toutes les issues, puis seulement former l'observable multipartite appropriée. La présente v2 ne prédit pas les statistiques GHZ ou Mermin.
 
-## 11 Conclusion
+## 12 Conclusion
 
 Le facteur deux du modèle planaire reçoit une décomposition exacte : une contribution de populations à demi-amplitude et une contribution de cohérence de même amplitude. La cohérence redistribue les probabilités conjointes tout en laissant les marginales invariantes.
 
 Bell 45 v2 confirme que la loi ainsi définie produit les fréquences attendues lorsqu'on échantillonne réellement un couple de signes par essai. Le comptage expérimental ordinaire est conservé. La dynamique physique reste une question distincte : il faut établir quelles variables du champ portent la cohérence et comment les interactions avec les détecteurs convertissent cette structure en événements.
 
-L'intérêt de cette reformulation est de rendre cette question calculable. Elle fournit une famille normalisée, un paramètre de contrôle, des comparaisons classiques précises et des tests qui dépassent le seul accord d'une courbe avec un cosinus.
+Le contrôle avec polariseurs parallèles confirme qu'une corrélation peut varier sans changement de l'autre résultat ; il ne fournit pas la contribution manquante du singulet. L'intérêt de cette reformulation est de rendre cette question calculable.
 
 <!-- page -->
 
@@ -312,15 +413,26 @@ L'intérêt de cette reformulation est de rendre cette question calculable. Elle
 
 [10] C. S. Amorim. Indistinguishability as nonlocality constraint. Scientific Reports 8, 6091 (2018). [Article](https://www.nature.com/articles/s41598-018-24489-7).
 
+[11] T. Norsen. Local Causality and Completeness: Bell vs. Jarrett. Foundations of Physics 39, 273 (2009). Analyse critique de la lecture causale de PI/OI. [Article](https://arxiv.org/abs/0808.2178).
+
+[12] B. S. Cirel'son (Tsirelson). Quantum generalizations of Bell's inequality. Letters in Mathematical Physics 4, 93–100 (1980). [Article original](https://doi.org/10.1007/BF00417500).
+
+<!-- page -->
+
 ## Reproductibilité
 
 La simulation utilise Python, NumPy et Matplotlib. Aucun module SciPy n'est requis. Exécution de référence depuis la racine du projet :
 
 ~~~text
-python simu/Bell_test_45.py --coherence 1 --no-show
-python analyse/test_bell45_v2.py
+python code/Bell_test_45.py --coherence 1 --no-show
+python code/test_bell45_v2.py
+python code/test_locality.py
+python code/audit_locality.py
+python code/build_bell_v2_paper.py
 ~~~
 
-Le dossier simu/resultats_bell45_v2 contient les six figures, les tableaux courbes.csv et convergence.csv, les effectifs complets CHSH dans resultats.json et un extrait du journal de 1 000 essais par contexte. Le JSON enregistre aussi les versions des bibliothèques, la graine et l'empreinte du script.
+Le dossier code/resultats_bell45_v2 contient les six figures, les tableaux courbes.csv et convergence.csv, les effectifs complets CHSH dans resultats.json et un extrait du journal de 1 000 essais par contexte. Le JSON enregistre aussi les versions des bibliothèques, la graine et l'empreinte du script.
 
-Les contrôles comparent les probabilités du programme à des projections de matrices de densité calculées indépendamment ; ils vérifient positivité, normalisation, marginales, comptage AB et reproductibilité. Le calcul des champs gaussiens est conservé dans analyse/coherence_facteur_deux.py.
+Les contrôles comparent les probabilités du programme à des projections de matrices de densité calculées indépendamment ; ils vérifient positivité, normalisation, marginales, comptage AB et reproductibilité. Le calcul des champs gaussiens est conservé dans code/coherence_facteur_deux.py.
+
+Le contrôle des polariseurs utilise la graine 20260917. Son dossier code/resultats_locality conserve les effectifs par contexte, les diagnostics de dépendance, les courbes et le journal complet des choix et résultats. La version 2.1 sépare préparation et réponse sans changer la suite aléatoire de la simulation de référence.

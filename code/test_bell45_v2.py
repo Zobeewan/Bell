@@ -4,11 +4,31 @@ import importlib.util
 import unittest
 import numpy as np
 
-src=Path(__file__).resolve().parents[1]/'simu'/'Bell_test_45.py'
+src=Path(__file__).resolve().with_name('Bell_test_45.py')
 spec=importlib.util.spec_from_file_location('bell45',src)
 m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
 
 class CoherenceTests(unittest.TestCase):
+    def test_preparation_before_choices_and_dependency(self):
+        source=m.prepare_source(160000,m.make_rng(31))
+        choice_rng=m.make_rng(78)
+        a=choice_rng.choice([0.,np.pi/2],len(source.phi))
+        b=choice_rng.choice([-np.pi/4,np.pi/4],len(source.phi))
+        ao,bo,*_=m.respond_joint(a,b,source)
+        for x in (0.,np.pi/2):
+            for y in (-np.pi/4,np.pi/4):
+                mask=(a==x)&(b==y); n=mask.sum()
+                actual=float(np.mean(ao[mask]*bo[mask]))
+                self.assertLess(abs(actual-m.theoretical_E(x,y)),6/np.sqrt(n))
+        a0,b0,*_=m.respond_joint(0.,0.,source)
+        a1,b1,*_=m.respond_joint(np.pi,0.,source)
+        np.testing.assert_array_equal(a0,a1)
+        np.testing.assert_array_equal(b0,-b1)
+        # The new interface preserves the old generator, including its seed.
+        expected=m.sample_joint_pairs(.7,-.2,160000,m.make_rng(31),.6)
+        actual=m.respond_joint(.7,-.2,source,.6)
+        for first,second in zip(expected,actual): np.testing.assert_array_equal(first,second)
+
     def test_density_matrix_reference(self):
         x=np.array([[0.,1.],[1.,0.]])
         z=np.diag([1.,-1.]); eye=np.eye(2)
