@@ -1,0 +1,50 @@
+{
+  "scope": "Reference QUANTIQUE : couplage local B-C et coherence reduite de A-B.\n\nU_BC = |0><0|_B x I_C + |1><1|_B x Ry(2*theta)_C.\nCe mecanisme agit sur un singulet deja prepare ; il n'explique pas sa creation\npar une dynamique classique. q complexe, phase fixe et perte de module distingues.\n",
+  "code_sha256": "4051dbc574687b5652dd9680fef3ddfa8d6acbf44a95848229c195b82808fcc6",
+  "phase_cases": [
+    {
+      "phase_rad": 0.0,
+      "Re_q": 1.0,
+      "R": 1.0,
+      "concurrence": 0.9999999999999999,
+      "Smax": 2.8284271247461903
+    },
+    {
+      "phase_rad": 0.7853981633974483,
+      "Re_q": 0.7071067811865476,
+      "R": 1.0,
+      "concurrence": 0.9999999999999998,
+      "Smax": 2.8284271247461903
+    },
+    {
+      "phase_rad": 1.0471975511965976,
+      "Re_q": 0.5000000000000001,
+      "R": 1.0,
+      "concurrence": 1.0,
+      "Smax": 2.8284271247461903
+    },
+    {
+      "phase_rad": 1.5707963267948966,
+      "Re_q": 6.123233995736766e-17,
+      "R": 1.0,
+      "concurrence": 0.9999999999999999,
+      "Smax": 2.8284271247461903
+    },
+    {
+      "phase_rad": 3.141592653589793,
+      "Re_q": -1.0,
+      "R": 1.0,
+      "concurrence": 0.9999999999999999,
+      "Smax": 2.8284271247461903
+    }
+  ],
+  "angles_checked": 61,
+  "c_half": {
+    "theta": 1.0471975511965976,
+    "S_twirl": 2.121320343559643,
+    "S_fixed": 2.23606797749979,
+    "three_tangle": 0.75,
+    "gaussian_phase_std_rad": 1.1774100225154747,
+    "gaussian_phase_std_deg": 67.46062504653993
+  }
+}

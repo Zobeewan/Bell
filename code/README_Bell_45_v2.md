@@ -67,7 +67,7 @@ python code/test_bell45_v2.py
 
 Ces contrôles comprennent une comparaison indépendante aux matrices de densité et projecteurs, les probabilités positives normalisées, les fréquences des événements, les marginales et la reproductibilité. Ils ne se limitent pas à vérifier une égalité avec la fonction qui produit les tirages.
 
-Le papier est dans `paper/Bell_Pair_Coherence_v2.pdf`. La source modifiable est le fichier Markdown de même nom, avec formules LaTeX et liens vers les références. Le générateur est `code/build_bell_v2_paper.py` (ReportLab, Matplotlib, Pillow et pypdf). Les chemins des figures sont relatifs au Markdown : conserver l'arborescence pour reconstruire le PDF.
+Le papier actuel est dans `paper/Bell_Pair_Coherence_v2.2.pdf`. La source modifiable est le fichier Markdown de même nom, avec formules LaTeX et liens vers les références. Le générateur est `code/build_bell_v2_paper.py` (ReportLab, Matplotlib, Pillow et pypdf). Les chemins des figures sont relatifs au Markdown : conserver l'arborescence pour reconstruire le PDF. La version 2.1 est conservée. Les simulations supplémentaires de phase et de couplage BC sont décrites dans [README_Phase_Memory.md](README_Phase_Memory.md).
 
 ## Audit de localité (v2.1)
 

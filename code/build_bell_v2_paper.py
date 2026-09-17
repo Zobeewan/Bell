@@ -17,7 +17,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Image,Table,TableStyle,PageBreak,KeepTogether,Preformatted
 
 ROOT=Path(__file__).resolve().parents[1]
-SOURCE=ROOT/'paper/Bell_Pair_Coherence_v2.md'
+SOURCE=ROOT/'paper/Bell_Pair_Coherence_v2.2.md'
 DEST=SOURCE.with_suffix('.pdf')
 TMP=ROOT/'tmp/pdfs/bell_v2'; TMP.mkdir(parents=True,exist_ok=True)
 FONTDIR=Path(matplotlib.get_data_path())/'fonts/ttf'
@@ -110,7 +110,7 @@ def parse_page(text,index):
 
 def footer(canvas,doc):
     canvas.saveState(); canvas.setFillColor(colors.HexColor('#6d7781')); canvas.setFont('Sans',8)
-    canvas.drawString(52,27,'Cohérence de paire et corrélations de Bell | v2.1')
+    canvas.drawString(52,27,'Cohérence de paire et corrélations de Bell | v2.2')
     canvas.drawRightString(A4[0]-52,27,str(doc.page))
     canvas.restoreState()
 
@@ -121,7 +121,7 @@ for i,page in enumerate(pages):
     story.extend(parse_page(page,i))
 doc=SimpleDocTemplate(str(DEST),pagesize=A4,leftMargin=52,rightMargin=52,topMargin=45,bottomMargin=46,
                       title='Cohérence de paire et corrélations de Bell',author='',
-                      subject='Version 2.1 de Bell Indistinguishability')
+                      subject='Version 2.2 de Bell Indistinguishability')
 doc.build(story,onFirstPage=footer,onLaterPages=footer)
 from pypdf import PdfReader
 r=PdfReader(DEST)
